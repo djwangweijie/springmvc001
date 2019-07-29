@@ -37,6 +37,6 @@
 <a href="a4/pname/wwj">hellrestful</a>
 
 <a href="a6">redirect和forward</a>
-${pname}
+${pname}   ${user}
 </body>
 </html>

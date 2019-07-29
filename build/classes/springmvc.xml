@@ -13,14 +13,15 @@
 	<context:component-scan base-package="com.wwj" />
 
 	<!-- 注解驱动 -->
-<mvc:annotation-driven conversion-service="conversionService"/>
-      <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
-          <property name="converters">
-              <set>
-                  <bean class="com.wwj.convert.StringToDate"></bean>
-              </set>
-          </property>
-      </bean>
+	<mvc:annotation-driven conversion-service="conversionService" />
+	<bean id="conversionService"
+		class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<bean class="com.wwj.convert.StringToDate"></bean>
+			</set>
+		</property>
+	</bean>
 
 	<!-- 视图解释器 使用前后缀拼接跳转页面路径 -->
 	<bean
@@ -28,8 +29,28 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	<mvc:resources location="/js/" mapping="/js/**" />
+
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置请求编码格式，必须与JSP中的pageEncoding属性一致 -->
+		<property name="defaultEncoding" value="UTF-8" />
+		<!-- 设置允许上传文件的最大值（2MB），单位为字节 -->
+		<property name="maxUploadSize" value="2097152" />
+	</bean>
 	
-	
+  <!--  
+  <mvc:interceptors>
+        <mvc:interceptor>
+           拦截所有的请求，这个必须写在前面，也就是写在【不拦截】的上面
+            <mvc:mapping path="/**" />
+          但是排除下面这些，也就是不拦截请求 
+            <mvc:exclude-mapping path="/login.html" />
+            <bean class="com.wwj.interceptor.MyInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+    -->
+
 
 
 
